@@ -7,36 +7,18 @@ import { Provider } from 'react-redux';
 import App from './components/app';
 import reducer from './reducer';
 
-// import { inc, dec, rnd } from './actions';
-// const initialState = 0;
+
 
 const store = createStore(reducer);// Создаем store
-
-
-// const { inc, dec, rnd } = //{ incDispatch, decDispatch, rndDispatch }
-//   bindActionCreators( actions, dispatch);
 
 
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
 root.render(
-
   <Provider store={store}>
     <App/>
   </Provider>
-
-  // <Counter 
-  //   counter={store.getState()}
-  //   inc={inc}
-  //   dec={dec}
-  //   rnd={() => {
-  //     const value = Math.floor(Math.random()*10);
-  //     rnd(value);
-  //   }}
-  // />
 );
-
-
 
 
 // Это была 17 версия React:
@@ -45,6 +27,11 @@ root.render(
 
 
 
+
+
+
+// const { inc, dec, rnd } = //{ incDispatch, decDispatch, rndDispatch }
+//   bindActionCreators( actions, dispatch);
 
 
 // const update = () => {
