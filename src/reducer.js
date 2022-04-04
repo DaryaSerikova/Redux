@@ -1,7 +1,7 @@
 
 
 
-const reducer = (state = 0, action) => { //(текущий state, действие над state)
+const reducer = (state = 15, action) => { //(текущий state, действие над state)
   //аналогия setState
 
   switch (action.type) {

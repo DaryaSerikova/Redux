@@ -1,48 +1,40 @@
 import React from 'react';
 // import ReactDOM from 'react-dom';
 import { createRoot } from 'react-dom/client';
-import { createStore, bindActionCreators } from 'redux';
+import { createStore } from 'redux';
+import { Provider } from 'react-redux';
 
-import Counter from './counter';
-
+import App from './components/app';
 import reducer from './reducer';
-import * as actions from './actions';
-// import { inc, dec, rnd } from './actions';
 
+// import { inc, dec, rnd } from './actions';
 // const initialState = 0;
 
-
-
 const store = createStore(reducer);// Создаем store
-const { dispatch } = store;
 
 
-const { inc, dec, rnd } = //{ incDispatch, decDispatch, rndDispatch }
-  bindActionCreators( actions, dispatch);
+// const { inc, dec, rnd } = //{ incDispatch, decDispatch, rndDispatch }
+//   bindActionCreators( actions, dispatch);
 
-
-
-
-
-const update = () => {
-
-  root.render(
-    <Counter 
-      counter={store.getState()}
-      inc={inc}
-      dec={dec}
-      rnd={() => {
-        const value = Math.floor(Math.random()*10);
-        rnd(value);
-      }}
-    />
-  );
-};
 
 const rootElement = document.getElementById('root');
 const root = createRoot(rootElement);
-update();
-store.subscribe(update);
+root.render(
+
+  <Provider store={store}>
+    <App/>
+  </Provider>
+
+  // <Counter 
+  //   counter={store.getState()}
+  //   inc={inc}
+  //   dec={dec}
+  //   rnd={() => {
+  //     const value = Math.floor(Math.random()*10);
+  //     rnd(value);
+  //   }}
+  // />
+);
 
 
 
