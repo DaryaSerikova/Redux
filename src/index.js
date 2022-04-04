@@ -25,26 +25,29 @@ const reducer = (state = 0, action) => { //(текущий state, действи
 
 const store = createStore(reducer);// Создаем store
 
+
+const inc = () => ({ type: 'INC' });
+const dec = () => ({ type: 'DEC' });
+const rnd = (payload) => ({ type: 'RND', payload });
+
+
 document
   .getElementById('inc')
   .addEventListener('click', () => {
-    store.dispatch({type: 'INC'});
+    store.dispatch(inc());
   });
 
 document
   .getElementById('dec')
   .addEventListener('click', () => {
-    store.dispatch({type: 'DEC'});
+    store.dispatch(dec());
   });
 
 document
   .getElementById('rnd')
   .addEventListener('click', () => {
     const payload = Math.floor(Math.random()*10)
-    store.dispatch({
-      type: 'RND',
-      payload
-    });
+    store.dispatch(rnd(payload));
   });
 
 const update = () => {
