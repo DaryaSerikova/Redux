@@ -26,21 +26,14 @@ const mapStateToProps = (state) => { //(текущий state)
   }
 };
 
-const mapDispatchToProps = (dispatch) => {
+// const mapDispatchToProps = (dispatch) => {
+//   return bindActionCreators(actions, dispatch);//{ inc, dec, rnd }
+// };
 
-  const { inc, dec, rnd } = bindActionCreators(actions, dispatch);
+// export default connect(mapStateToProps, mapDispatchToProps)(Counter);
 
-  return {
-    inc,
-    dec,
-    rnd: () => {
-      const randomValue = Math.floor(Math.random()*10);
-      rnd(randomValue);
-    }
-  }
-};
 
-export default connect(mapStateToProps, mapDispatchToProps)(Counter);
+export default connect(mapStateToProps, actions)(Counter);
 
 // connect()() - возвращает компонент. Это обертка над компонентом
 // connect(здесь параметры конфигурации)(оборачиваемый компонент)
