@@ -1,34 +1,14 @@
 import { createStore } from 'redux';
+import reducer from './reducer';
+import { inc, dec, rnd } from './actions';
 
 // const initialState = 0;
 
-const reducer = (state = 0, action) => { //(текущий state, действие над state)
-  //аналогия setState
 
-  switch (action.type) {
-
-    case 'RND':
-      return state + action.payload;
-
-    case 'INC':
-      return state + 1;
-
-    case 'DEC':
-        return state - 1;
-
-    default: 
-      return state;
-  }
-
-  // return 0;
-};
 
 const store = createStore(reducer);// Создаем store
 
 
-const inc = () => ({ type: 'INC' });
-const dec = () => ({ type: 'DEC' });
-const rnd = (payload) => ({ type: 'RND', payload });
 
 
 document
