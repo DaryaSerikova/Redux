@@ -1,4 +1,10 @@
+import React from 'react';
+// import ReactDOM from 'react-dom';
+import { createRoot } from 'react-dom/client';
 import { createStore, bindActionCreators } from 'redux';
+
+import Counter from './counter';
+
 import reducer from './reducer';
 import * as actions from './actions';
 // import { inc, dec, rnd } from './actions';
@@ -10,6 +16,51 @@ import * as actions from './actions';
 const store = createStore(reducer);// Создаем store
 const { dispatch } = store;
 
+
+const { inc, dec, rnd } = //{ incDispatch, decDispatch, rndDispatch }
+  bindActionCreators( actions, dispatch);
+
+
+
+
+
+const update = () => {
+
+  root.render(
+    <Counter 
+      counter={store.getState()}
+      inc={inc}
+      dec={dec}
+      rnd={() => {
+        const value = Math.floor(Math.random()*10);
+        rnd(value);
+      }}
+    />
+  );
+};
+
+const rootElement = document.getElementById('root');
+const root = createRoot(rootElement);
+update();
+store.subscribe(update);
+
+
+
+
+// Это была 17 версия React:
+// ReactDOM.render(<Counter />, document.getElementById('root'));
+
+
+
+
+
+
+// const update = () => {
+//   // document
+//   //   .getElementById('counter')
+//   //   .innerHTML = store.getState();
+// };
+
 // const bindActionCreator = (creator, dispatch) = (...args) => {
 //   dispatch(creator(...args));
 // };
@@ -18,31 +69,22 @@ const { dispatch } = store;
 // const decDispatch = bindActionCreators( dec, dispatch);
 // const rndDispatch = bindActionCreators( rnd, dispatch);//(payload) => dispatch(rnd(payload));
 
-const { inc, dec, rnd } = //{ incDispatch, decDispatch, rndDispatch }
-  bindActionCreators( actions, dispatch);
 
-document
-  .getElementById('inc')
-  .addEventListener('click', inc ); //incDispatch
 
-document
-  .getElementById('dec')
-  .addEventListener('click', dec );
+// document
+//   .getElementById('inc')
+//   .addEventListener('click', inc ); //incDispatch
 
-document
-  .getElementById('rnd')
-  .addEventListener('click', () => {
-    const payload = Math.floor(Math.random()*10);
-    rnd(payload); //store.dispatch(rnd(payload));
-  });
+// document
+//   .getElementById('dec')
+//   .addEventListener('click', dec );
 
-const update = () => {
-  document
-    .getElementById('counter')
-    .innerHTML = store.getState();
-};
-
-store.subscribe(update);
+// document
+//   .getElementById('rnd')
+//   .addEventListener('click', () => {
+//     const payload = Math.floor(Math.random()*10);
+//     rnd(payload); //store.dispatch(rnd(payload));
+//   });
 
 
 
