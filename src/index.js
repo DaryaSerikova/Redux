@@ -1,17 +1,75 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './index.css';
-import App from './App';
-import reportWebVitals from './reportWebVitals';
+import { createStore } from 'redux';
 
-ReactDOM.render(
-  <React.StrictMode>
-    <App />
-  </React.StrictMode>,
-  document.getElementById('root')
-);
+// const initialState = 0;
 
-// If you want to start measuring performance in your app, pass a function
-// to log results (for example: reportWebVitals(console.log))
-// or send to an analytics endpoint. Learn more: https://bit.ly/CRA-vitals
-reportWebVitals();
+const reducer = (state = 0, action) => { //(текущий state, действие над state)
+  //аналогия setState
+
+  switch (action.type) {
+    case 'INC':
+      return state + 1;
+    case 'DEC':
+        return state - 1;
+    default: 
+      return state;
+  }
+
+  // return 0;
+};
+
+const store = createStore(reducer);// Создаем store
+
+document
+  .getElementById('inc')
+  .addEventListener('click', () => {
+    store.dispatch({type: 'INC'});
+  });
+
+document
+  .getElementById('dec')
+  .addEventListener('click', () => {
+    store.dispatch({type: 'DEC'});
+  });
+
+const update = () => {
+  document
+    .getElementById('counter')
+    .innerHTML = store.getState();
+};
+
+store.subscribe(update);
+
+
+
+// store.subscribe(() => { 
+//   //Выводим state после каждого изменения store
+//   console.log(store.getState());
+// });
+
+// //Выводим первоначальное состояние нашего приложения:
+// console.log(store.getState());
+
+// Просим store выполнить одно из действий.
+// Хотим выполнить действие с типом 'INC'
+// store.dispatch({type: 'INC'});
+// store.dispatch({type: 'INC'});
+
+// //Выводим текущее состояние нашего приложения:
+// console.log(store.getState());
+
+
+
+
+
+// let state = reducer(undefined, {})
+
+// // Просим изменить счетчик на 1:
+// // let state = reducer(initialState, { type: 'INC' });
+// state = reducer(state, { type: 'INC' });
+
+// //Передаем начальное значение и хотим сделать действие с типом INC
+
+// console.log(state);
+
+// state = reducer(state, { type: 'INC' });
+// console.log(state);
