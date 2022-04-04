@@ -6,10 +6,16 @@ const reducer = (state = 0, action) => { //(текущий state, действи
   //аналогия setState
 
   switch (action.type) {
+
+    case 'RND':
+      return state + action.payload;
+
     case 'INC':
       return state + 1;
+
     case 'DEC':
         return state - 1;
+
     default: 
       return state;
   }
@@ -29,6 +35,16 @@ document
   .getElementById('dec')
   .addEventListener('click', () => {
     store.dispatch({type: 'DEC'});
+  });
+
+document
+  .getElementById('rnd')
+  .addEventListener('click', () => {
+    const payload = Math.floor(Math.random()*10)
+    store.dispatch({
+      type: 'RND',
+      payload
+    });
   });
 
 const update = () => {
